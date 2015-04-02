@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Products Dashboard</title>
+	<style>
+	* {
+		font-family: 'Helvetica Neu', Verdana, Tahoma;
+		font-size: 1em;
+	}
+	#container {
+		width: 80%;
+		margin: 10px auto;
+		padding: 10px;
+	}
+	tr {
+		vertical-align: top;
+	}
+	td {
+		padding: 5px;
+		border-right: 1px solid #8e8e8e;
+		border-bottom: 1px solid #9e9e9e;
+	}
+	th {
+		border-bottom: 2px solid #8e8e8e;
+		border-right: 1px solid #8e8e8e;
+		text-align: left;
+		padding: 2px;
+	}
+	#navigate {
+		margin-left: 100px;
+		padding: 5px;
+		border-top: 2px solid #8e8e8e;
+	}
+	.money {
+		text-align: right;
+	}
+	</style>
+</head>
+<body>
+
+<div id='container'>
+	<div>
+	<% if flash[:alert] then %>
+		<h3>Alert: <%=flash[:alert] %></h3>
+	<% end %>
+	<% if flash[:notice] then %>
+		<h3>Notice: <%=flash[:notice] %></h3>
+	<% end %>
+	</div>
+	<table>
+		<tr>
+			<th>Name</th><th>Description</th><th>Price</th><th>Added</th><th>Actions</th>
+		</tr>
+		<% @products.each do |product| %>
+		<tr>
+			<td><%=product.name%></td>
+			<td><%=product.description%></td>
+			<td class='money'><%=number_to_currency(product.pricing, :unit => '$')%></td>
+			<td><%=product.created_at.strftime('%m/%d/%y')%></td>
+			<td><a href='/product/<%=product.id%>'><%= image_tag("Info.png", :alt => "Show Details", :width => 20, :height => 20, :crop => :fill)%></a> <a href='/product/<%=product.id%>/edit'><%= image_tag('Edit.png', :alt => "Edit Product", :width => 20, :height => 20, :crop => :fill) %></a> <a href='/product/<%=product.id%>' data-method='delete'><%= image_tag('Trash.png', :alt => "Delete Product from Catalog", :width => 20, :height => 20, :crop => :fill) %></a></td>
+		</tr>
+		<% end %>
+	</table>
+</div>
+	<div id='navigate'>
+		<a href='/product/create'>Create New Product</a>
+	</div>
+</body>
+</html>

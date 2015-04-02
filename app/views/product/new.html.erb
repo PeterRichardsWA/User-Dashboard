@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Products Edit</title>
+	<style>
+	* {
+		font-family: 'Helvetica Neu', Verdana, Tahoma;
+		font-size: 1em;
+	}
+	#container {
+		width: 80%;
+		margin: 10px auto;
+		padding: 10px;
+	}
+	tr {
+		vertical-align: top;
+	}
+	td {
+		padding: 5px;
+		border-right: 1px solid #8e8e8e;
+		border-bottom: 1px solid #9e9e9e;
+	}
+	#navigate {
+		margin-left: 100px;
+		padding: 5px;
+		border-top: 2px solid #8e8e8e;
+	}
+	</style>
+</head>
+<body>
+
+<div id='container'>
+	<form method='post' action='/product/create'>
+		<input type='hidden' name='authenticity_token' value='<%=form_authenticity_token%>'>
+		<label for='name'>Name:</label><br>
+		<input type='text' name='name' size=30 value='' placeholder='Name of item here...'><p>
+		<label for='name'>Description:</label><br>
+		<textarea name='description' cols=50 rows=5 placeholder='Description here....'></textarea><p>
+		<label for='name'>Price:</label><br>
+		$<input type='number' step='0.01' name='pricing' size=6 value='' placeholder='0.00'><p>
+		<input type='submit' value='save new item'>
+	</form>
+</div>
+<div id='navigate'>
+	<a href='/'>Back to Main</a>
+</div>
+</body>
+</html>
